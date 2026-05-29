@@ -2,7 +2,8 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Estrutura - Simulador Agrinho 2026</title>
+    <title>Agrinho 2026 - Jogo do Manejo Integrado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -24,35 +25,74 @@
     <!-- Seção do Simulador -->
     <main>
         <section>
-            <h2>Simulador de Manejo Integrado</h2>
-            
-            <!-- Representação Visual -->
-            <div>
-                <p>[Área da Plantação]</p>
-                <p>🌿 🐛 🌿 🐛 🌿</p>
+            <h2>Jogo: Manejo Integrado (Clique para controlar!)</h2>
+
+            <!-- Ilustração simples SVG -->
+            <div class="farm-illustration" aria-hidden>
+                <svg viewBox="0 0 200 60" width="100%" height="60" preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                        <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
+                            <stop offset="0%" stop-color="#fff3e0"/>
+                            <stop offset="100%" stop-color="#ffe0b2"/>
+                        </linearGradient>
+                    </defs>
+                    <rect x="0" y="0" width="200" height="60" fill="url(#g1)" />
+                    <!-- sol -->
+                    <circle cx="170" cy="12" r="10" fill="#FFD54F" />
+                    <!-- casinha -->
+                    <rect x="18" y="20" width="26" height="18" fill="#8D6E63" rx="2" />
+                    <polygon points="18,20 31,10 44,20" fill="#D84315" />
+                    <!-- fileiras -->
+                    <g stroke="#6D4C41" stroke-width="1">
+                        <path d="M0 50 Q50 40 100 50 T200 50" fill="none" opacity="0.35"/>
+                        <path d="M0 54 Q50 44 100 54 T200 54" fill="none" opacity="0.25"/>
+                    </g>
+                </svg>
             </div>
 
-            <!-- Botões de Interação -->
-            <div>
-                <button type="button">Ativar Controle Biológico (Vespas)</button>
-                <button type="button">Ativar Controle Químico (Inseticida)</button>
-                <button type="button">Instalar Armadilhas de Monitoramento</button>
-            </div>
+                <!-- Representação Visual -->
+                <div class="area-plantacao" id="area-plantacao">
+                    <div id="plantacao-visual">
+                        <span id="plantacao-emojis">🌿 🐛 🌿 🐛 🌿</span>
+                    </div>
+                </div>
+
+                <!-- Heads-up display (HUD) -->
+                <div id="hud">
+                    <div class="hud-item"><strong>Pragas</strong><span id="hud-pragas">150</span></div>
+                    <div class="hud-item"><strong>Saúde</strong><span id="hud-saude">80%</span></div>
+                    <div class="hud-item"><strong>Custo</strong><span id="hud-custo">R$ 0</span></div>
+                    <div class="hud-item"><strong>Pontos</strong><span id="hud-score">0</span></div>
+                    <div class="hud-item"><strong>Nível</strong><span id="hud-level">1</span></div>
+                    <div id="theme-selector" aria-label="Selecionar tema">
+                        <button class="theme-btn" data-theme="theme-a" title="Tema A - Escolar">A</button>
+                        <button class="theme-btn" data-theme="theme-b" title="Tema B - Cartoon">B</button>
+                        <button class="theme-btn" data-theme="theme-c" title="Tema C - Profissional">C</button>
+                    </div>
+                    <button id="btn-mute" class="control-button" aria-label="mudo">🔊</button>
+                </div>
+
+                <!-- Botões de Interação -->
+                <div class="controls">
+                    <button id="btn-biologico" type="button" class="action-button">Controle Biológico</button>
+                    <button id="btn-quimico" type="button" class="action-button">Controle Químico</button>
+                    <button id="btn-armadilhas" type="button" class="action-button">Instalar Armadilhas</button>
+                </div>
         </section>
 
         <section>
             <h3>Dados da Lavoura</h3>
             <ul>
-                <li><strong>População de Pragas:</strong> 150 indivíduos por m²</li>
-                <li><strong>Saúde do Ecossistema:</strong> 80%</li>
-                <li><strong>Presença de Inimigos Naturais:</strong> Alta</li>
-                <li><strong>Nível de Dano Econômico:</strong> <progress value="40" max="100"></progress></li>
+                <li><strong>População de Pragas:</strong> <span id="pragas-val">150</span> indivíduos</li>
+                <li><strong>Saúde do Ecossistema:</strong> <span id="saude-val">80%</span></li>
+                <li><strong>Presença de Inimigos Naturais:</strong> <span id="inimigos-val">Alta</span></li>
+                <li><strong>Nível de Dano Econômico:</strong> <progress id="dano-val" value="40" max="100"></progress> <span id="custo-val">R$ 0</span></li>
             </ul>
         </section>
 
         <section>
             <h3>Diário de Campo (Log)</h3>
-            <textarea cols="50" rows="5" readonly>
+            <textarea id="diario-campo" cols="50" rows="6" readonly>
 08/05/2026: Monitoramento detectou presença de lagartas.
 08/05/2026: Recomendado uso de agentes biológicos.
             </textarea>
@@ -63,9 +103,20 @@
 
     <!-- Rodapé -->
     <footer>
-        <p>Desenvolvido por: Aluna do 3º Ano - Ensino Médio</p>
+        <p>Desenvolvido por: Gabrielly</p>
         <p>Foco: Equilíbrio entre produção e meio ambiente.</p>
     </footer>
 
-</body>
-</html>
+        <script src="script.js"></script>
+        <div id="overlay" class="">
+            <div class="overlay-content">
+                <h2 id="overlay-title">Agrinho 2026</h2>
+                <p id="overlay-msg">Objetivo: em 120 segundos, mantenha a saúde >= 90% e pragas <= 30.</p>
+                <div class="overlay-actions">
+                    <button id="overlay-start">Iniciar Jogo</button>
+                    <button id="overlay-restart" class="hidden">Reiniciar</button>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>

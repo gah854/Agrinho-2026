@@ -9,22 +9,22 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    background-color: var(--fundo);
-    color: #333;
+    font-family: Inter, 'Segoe UI', Tahoma, sans-serif;
+    background: var(--fundo, radial-gradient(circle at 10% 10%, #e8f5e9 0%, #f1f8e9 30%, #dff0e0 100%));
+    color: #222;
     margin: 0;
     padding: 20px;
 }
 
 /* Cabeçalho */
 header {
-    background-color: var(--verde-escuro);
+    background: linear-gradient(90deg, var(--verde-escuro), #2e7d32);
     color: var(--branco);
-    padding: 30px;
+    padding: 26px 22px;
     text-align: center;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    margin-bottom: 18px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
 }
 
 /* Menu de Navegação */
@@ -44,7 +44,7 @@ nav a {
 
 /* Área Principal (Simulador) */
 main {
-    max-width: 900px;
+    max-width: 960px;
     margin: 0 auto;
     display: grid;
     gap: 20px;
@@ -52,10 +52,47 @@ main {
 
 section {
     background: var(--branco);
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 24px 26px;
+    border-radius: 18px;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.04);
 }
+
+section h2, section h3 {
+    margin-top: 0;
+    color: #1b5e20;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+#hud {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    min-width: 290px;
+    flex-wrap: wrap;
+}
+
+#hud .hud-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+    background: rgba(255,255,255,0.9);
+    padding: 8px 10px;
+    border-radius: 10px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
+}
+
+#hud .hud-item strong { color: #388e3c; }
+
+#theme-selector { margin-left: 0; }
 
 /* Visual da Plantação */
 .area-plantacao {
@@ -64,10 +101,16 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
-    border: 4px solid var(--terra);
-    border-radius: 8px;
+    font-size: 2.4rem;
+    border: 6px solid var(--terra);
+    border-radius: 12px;
     margin: 15px 0;
+    position: relative;
+    overflow: hidden;
+}
+/* Simular fileiras da plantação */
+.area-plantacao {
+    background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0 12px, rgba(0,0,0,0) 12px 36px), linear-gradient(#b9f6ca, #81c784);
 }
 
 /* Botões */
@@ -75,21 +118,49 @@ button {
     background-color: var(--verde-claro);
     color: white;
     border: none;
-    padding: 12px 24px;
-    border-radius: 5px;
+    padding: 10px 18px;
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s ease;
-    margin: 5px;
+    font-weight: 700;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+    margin: 6px;
+    box-shadow: 0 6px 0 rgba(0,0,0,0.08);
 }
 
-button:hover {
-    background-color: var(--verde-escuro);
+button:active { transform: translateY(2px); box-shadow: 0 4px 0 rgba(0,0,0,0.06); }
+
+button:hover { filter: brightness(0.98); }
+
+button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* estilo de jogo para botões: borda em relevo */
+button {
+    border-bottom: 4px solid rgba(0,0,0,0.12);
+    text-shadow: 0 1px 0 rgba(0,0,0,0.12);
 }
 
-button:last-child {
-    background-color: var(--alerta);
-}
+.action-button { min-width: 170px; background: linear-gradient(180deg, var(--verde-claro), #2e7d32); }
+.action-button:hover { filter: brightness(1.05); }
+
+.control-button { background: rgba(255,255,255,0.92); color: #333; border: 1px solid rgba(0,0,0,0.1); box-shadow: 0 2px 0 rgba(0,0,0,0.1); }
+.control-button:hover { filter: brightness(0.95); }
+
+#theme-selector { display: flex; gap: 4px; align-items: center; }
+
+.theme-btn { background: rgba(255,255,255,0.85); border: 1px solid rgba(0,0,0,0.08); padding:6px 10px; border-radius:6px; font-weight:700; margin-right:0; cursor:pointer; min-width:32px; }
+.theme-btn.active { background: var(--verde-claro); color: white; box-shadow: 0 4px 0 rgba(0,0,0,0.08); }
+
+#hud { font-family: 'Press Start 2P', Inter, sans-serif; font-size: 11px; }
+
+#hud { font-family: 'Press Start 2P', Inter, sans-serif; font-size: 11px; }
+
+.farm-illustration { margin-bottom: 10px; }
+
+/* dar destaque na HUD */
+#hud { background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(245,255,245,0.95)); padding: 8px 10px; }
+
+/* plant emojis maior e com sombra */
+#plantacao-emojis { font-size: 2.6rem; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.12)); }
 
 /* Indicadores e Progressão */
 progress {
@@ -109,12 +180,73 @@ li {
 /* Diário de Campo */
 textarea {
     width: 100%;
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
+    background: #f7fff6;
+    border: 1px solid #cfe8d5;
+    border-radius: 12px;
+    padding: 12px;
     font-family: monospace;
     resize: none;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.04);
+}
+
+/* Plantação emojis */
+#plantacao-emojis {
+    font-size: 2.8rem;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+/* Pequena animação para insetos */
+@keyframes bug-wiggle {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-6px) rotate(-6deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+}
+
+.bug-anim { animation: bug-wiggle 1s ease-in-out infinite; }
+
+/* HUD */
+#hud {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: flex;
+    gap: 10px;
+    background: rgba(255,255,255,0.95);
+    padding: 8px 12px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    align-items: center;
+}
+
+.hud-item { font-weight: 700; color: #2e7d32; margin-left: 6px; }
+.hud-item span { margin-left: 6px; font-weight: 600; color: #333; }
+
+#btn-mute { background: transparent; border: none; font-size: 1.1rem; cursor: pointer; margin-left: 6px; }
+#hud .hud-item strong { display:block; font-size:0.7rem; color:#2e7d32; }
+#hud .hud-item span { font-size:0.95rem; }
+
+/* feedback de pontos */
+.score-pop { position: absolute; color: #2e7d32; font-weight: 800; pointer-events:none; transform: translateY(-10px); animation: pop 700ms ease-out forwards; }
+@keyframes pop { 0% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-40px) scale(1.2); } }
+
+/* Overlay de fim de jogo */
+#overlay.hidden { display: none; }
+#overlay { position: fixed; inset: 0; background: rgba(11,46,14,0.55); display:flex; align-items:center; justify-content:center; z-index:50; }
+.overlay-content { background: linear-gradient(180deg, #ffffff, #e7f5e8); padding: 26px 30px; border-radius: 18px; text-align:center; max-width:420px; width: 95%; box-shadow: 0 30px 70px rgba(0,0,0,0.25); border: 1px solid rgba(0,0,0,0.06); }
+.overlay-content h2 { margin: 0 0 10px 0; color: var(--verde-escuro); font-size: 1.5rem; }
+.overlay-content p { margin: 10px 0 18px 0; color: #31543a; line-height: 1.5; }
+.overlay-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.overlay-actions button { padding: 12px 20px; border-radius: 10px; min-width: 120px; }
+.overlay-actions button:first-child { background: var(--verde-claro); color: white; }
+.overlay-actions button:last-child { background: #f0f0f0; color: #333; border: 1px solid rgba(0,0,0,0.08); }
+
+/* Diário compacto */
+textarea { height: 110px; }
+
+@media (max-width: 600px) {
+    #hud { display: none; }
+    .area-plantacao { height: 120px; }
 }
 
 /* Rodapé */
@@ -126,3 +258,38 @@ footer {
     border-top: 1px solid #ccc;
     padding-top: 20px;
 }
+
+/* Theme variants: A = Escolar (limpo), B = Cartoon (vibrante), C = Profissional (sério) */
+body.theme-a {
+    --verde-escuro: #2e7d32;
+    --verde-claro: #66bb6a;
+    --terra: #6d4c41;
+    --alerta: #ffb74d;
+    --fundo: #f7fff5;
+    --branco: #ffffff;
+    font-family: Inter, Tahoma, sans-serif;
+}
+
+body.theme-b {
+    --verde-escuro: #1b5e20;
+    --verde-claro: #00c853;
+    --terra: #8d6e63;
+    --alerta: #ff7043;
+    --fundo: linear-gradient(180deg,#fff9c4,#e8f5e9);
+    --branco: #fffef6;
+    font-family: 'Press Start 2P', 'Inter', sans-serif;
+}
+
+body.theme-c {
+    --verde-escuro: #0b3d2e;
+    --verde-claro: #2e7d32;
+    --terra: #5d4037;
+    --alerta: #ff8a65;
+    --fundo: linear-gradient(180deg,#ffffff,#f3f6f4);
+    --branco: #ffffff;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* Theme selector buttons */
+.theme-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(0,0,0,0.06); padding:6px 8px; border-radius:6px; font-weight:700; margin-right:4px; cursor:pointer; }
+.theme-btn.active { background: var(--verde-claro); color: white; box-shadow: 0 4px 0 rgba(0,0,0,0.08); }
