@@ -2,8 +2,10 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agrinho 2026 - Jogo do Manejo Integrado</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -30,23 +32,6 @@
             <!-- Ilustração simples SVG -->
             <div class="farm-illustration" aria-hidden>
                 <svg viewBox="0 0 200 60" width="100%" height="60" preserveAspectRatio="xMidYMid meet">
-                    <defs>
-                        <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
-                            <stop offset="0%" stop-color="#fff3e0"/>
-                            <stop offset="100%" stop-color="#ffe0b2"/>
-                        </linearGradient>
-                    </defs>
-                    <rect x="0" y="0" width="200" height="60" fill="url(#g1)" />
-                    <!-- sol -->
-                    <circle cx="170" cy="12" r="10" fill="#FFD54F" />
-                    <!-- casinha -->
-                    <rect x="18" y="20" width="26" height="18" fill="#8D6E63" rx="2" />
-                    <polygon points="18,20 31,10 44,20" fill="#D84315" />
-                    <!-- fileiras -->
-                    <g stroke="#6D4C41" stroke-width="1">
-                        <path d="M0 50 Q50 40 100 50 T200 50" fill="none" opacity="0.35"/>
-                        <path d="M0 54 Q50 44 100 54 T200 54" fill="none" opacity="0.25"/>
-                    </g>
                 </svg>
             </div>
 
@@ -108,7 +93,7 @@
     </footer>
 
         <script src="script.js"></script>
-        <div id="overlay" class="">
+        <div id="overlay">
             <div class="overlay-content">
                 <h2 id="overlay-title">Agrinho 2026</h2>
                 <p id="overlay-msg">Objetivo: em 120 segundos, mantenha a saúde >= 90% e pragas <= 30.</p>
